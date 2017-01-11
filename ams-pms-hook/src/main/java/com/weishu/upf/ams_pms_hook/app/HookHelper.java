@@ -3,6 +3,7 @@ package com.weishu.upf.ams_pms_hook.app;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.List;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -50,6 +51,14 @@ public final class HookHelper {
             Method currentActivityThreadMethod = activityThreadClass.getDeclaredMethod("currentActivityThread");
             Object currentActivityThread = currentActivityThreadMethod.invoke(null);
 
+            Method method = activityThreadClass.getDeclaredMethod("getSystemContext");
+            Context context1 = (Context) method.invoke(currentActivityThread);
+
+            PackageManager packageManager = context1.getPackageManager();
+
+            List list = packageManager.getInstalledPackages(0);
+
+
             // 获取ActivityThread里面原始的 sPackageManager
             Field sPackageManagerField = activityThreadClass.getDeclaredField("sPackageManager");
             sPackageManagerField.setAccessible(true);
@@ -66,6 +75,7 @@ public final class HookHelper {
 
             // 2. 替换 ApplicationPackageManager里面的 mPm对象
             PackageManager pm = context.getPackageManager();
+
             Field mPmField = pm.getClass().getDeclaredField("mPM");
             mPmField.setAccessible(true);
             mPmField.set(pm, proxy);

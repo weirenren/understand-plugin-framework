@@ -12,6 +12,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
+        <service
+            android:name=".MyService"
+            android:process=":remote"
+            android:label="MyService"
+            android:sharedUserId="b">
+
+        </service>
+
     </application>
+
 
 </manifest>

@@ -25,6 +25,9 @@ class HookHandler implements InvocationHandler {
         Log.d(TAG, "hey, baby; you are hooked!!");
         Log.d(TAG, "method:" + method.getName() + " called with args:" + Arrays.toString(args));
 
+        if(method.getName().equals("getInstalledPackages")){
+            Log.d(TAG,"get done "+method.getName());
+        }
         return method.invoke(mBase, args);
     }
 }
