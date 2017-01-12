@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mvp.app.BizServiceContext;
 import com.example.mvp.base.BaseActivity;
 import com.example.mvp.base.Presenter;
 import com.example.mvp.mvp.presenter.MainPresenter;
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public List<Presenter> registerPresenters() {
+
         mMainPresenter = new MainPresenter(this);
 
         ArrayList list = new ArrayList();
